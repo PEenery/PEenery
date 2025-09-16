@@ -969,3 +969,80 @@ button:hover {
 .referral-wrapper .share-btn {
   margin-top: 16px;
 }
+
+/* ------------------------------------------------------------------ */
+/* Final layout refinements for centred typography and spacing       */
+/* ------------------------------------------------------------------ */
+main.container {
+  text-align: center;
+  padding: 28px 24px 48px;
+}
+
+main.container > * + * {
+  margin-top: 24px;
+}
+
+.intro-card {
+  padding: 28px 24px;
+  text-align: center;
+  margin-top: -32px;
+  box-shadow: 0 6px 16px rgba(11, 24, 33, 0.08);
+}
+
+.intro-card .greeting-text p {
+  margin-bottom: 12px;
+}
+
+.intro-card .btn {
+  margin-top: 20px;
+}
+
+#slidesContainer {
+  margin: 0 auto;
+}
+
+#slidesContainer p {
+  margin: 0;
+}
+
+.slides-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 8px 0 4px;
+}
+
+.next-date-text {
+  margin: 0;
+}
+
+.btn {
+  margin: 0 auto;
+}
+
+.videos-section {
+  margin-left: auto;
+  margin-right: auto;
+  gap: 20px;
+}
+
+.videos-section .video-item {
+  box-shadow: 0 6px 16px rgba(11, 24, 33, 0.08);
+}
+
+.videos-section .play-overlay {
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.services-wrapper,
+.referral-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.referral-wrapper {
+  padding: 20px 16px 28px;
+}
+
+.referral-wrapper .share-btn {
+  margin-top: 20px;
+}
