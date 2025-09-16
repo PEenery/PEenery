@@ -16,14 +16,21 @@
     <!-- 問候語及保養紀錄按鈕卡片 -->
     <section class="intro-card">
       <div id="greeting" class="greeting-text"></div>
+      <div class="status-board" aria-live="polite">
+        <div class="status-row">
+          <span class="status-label">下次保養時間</span>
+          <span class="status-value" id="nextDateValue">待安排</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">問卷連結</span>
+          <a class="status-value status-link" id="surveyLink" href="http://forms.gle/1mtZCkrerNMY8iZA8" target="_blank" rel="noopener noreferrer">http://forms.gle/1mtZCkrerNMY8iZA8</a>
+        </div>
+      </div>
       <button class="btn records-btn" type="button">保養紀錄</button>
     </section>
 
     <!-- 保養紀錄圖片輪播 -->
     <div id="slidesContainer" class="slides-wrapper"></div>
-    <!-- 下一次保養日期提示 -->
-    <p id="nextDateText" class="next-date-text"></p>
-
     <!-- 提提你按鈕 -->
     <button class="btn tip-btn" type="button">提提你</button>
     <!-- 影片堆疊 -->
@@ -112,9 +119,14 @@
         }
       }
       greetingDiv.innerHTML = `
-        <p>您好啊～我是 <strong>MAQUA 淨水管家</strong> 的客服！</p>
-        <p>這次為您提供的是<strong>保養維修記錄</strong>，特別感謝您一直信任我們的服務！</p>
-        <p>若使用中遇到任何問題，隨時聯絡我們，我們會及時為你處理。</p>
+        <div class="greeting-block">
+          <span class="greeting-emoji" aria-hidden="true">👏</span>
+          <div class="greeting-lines">
+            <p>今天已經幫您完成這次的保養維護，設備狀態一切良好，請安心使用～</p>
+            <p>感謝一直以來讓我們陪伴在您身邊！</p>
+          </div>
+        </div>
+        <p class="greeting-subline">我們會不斷優化服務，懇請你向我們大膽評價！</p>
       `;
     })();
     
@@ -222,8 +234,12 @@
 
     // 更新下一次保養日期文字，放在圖片處理完成後
     (function updateNextDate() {
-      const nextEl = document.getElementById('nextDateText');
-      if (!nextEl) return;
+      const dateEl = document.getElementById('nextDateValue');
+      const surveyEl = document.getElementById('surveyLink');
+      if (surveyEl && !surveyEl.textContent.trim()) {
+        surveyEl.textContent = surveyEl.href;
+      }
+      if (!dateEl) return;
       const dateParam = getQueryParam('date');
       if (dateParam) {
         try {
@@ -233,8 +249,7 @@
             const m = parseInt(parts[1], 10);
             const d = parseInt(parts[2], 10);
             if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
-              // 日期訊息與問卷訊息合併
-              nextEl.innerHTML = `下一次保養預計於 <strong>${y}年${m}月${d}日</strong>，屆時會再次為您服務～<br>麻煩您撥出少量時間填寫一份簡單小問卷：<a href="http://forms.gle/1mtZCkrerNMY8iZA8" target="_blank">http://forms.gle/1mtZCkrerNMY8iZA8</a>，感謝您的配合！`;
+              dateEl.textContent = `${y}年${m}月${d}日`;
               return;
             }
           }
@@ -242,8 +257,7 @@
           console.warn('無法解析日期參數');
         }
       }
-      // 如果沒有日期，顯示預設問卷提示
-      nextEl.innerHTML = `麻煩您撥出少量時間填寫一份簡單小問卷：<a href="http://forms.gle/1mtZCkrerNMY8iZA8" target="_blank">http://forms.gle/1mtZCkrerNMY8iZA8</a>`;
+      dateEl.textContent = '待安排';
     })();
   </script>
   <!-- 自定義播放按鈕行為：當點擊覆蓋層時播放影片，影片暫停時恢復覆蓋層 -->

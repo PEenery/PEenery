@@ -1103,8 +1103,8 @@ body.report-page main.container {
   padding: 36px 36px 64px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  text-align: center;
+  gap: 36px;
+  text-align: left;
 }
 
 body.report-page main.container > * + * {
@@ -1116,6 +1116,99 @@ body.report-page .intro-card {
   margin-bottom: 0;
   padding: 32px 28px;
   box-shadow: 0 8px 24px rgba(11, 24, 33, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: left;
+  color: #5B6E80;
+}
+
+body.report-page .greeting-text {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+body.report-page .greeting-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+body.report-page .greeting-emoji {
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--brand);
+}
+
+body.report-page .greeting-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+body.report-page .greeting-lines p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: inherit;
+}
+
+body.report-page .greeting-lines p:first-child {
+  font-weight: 600;
+}
+
+body.report-page .greeting-subline {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: inherit;
+  font-weight: 500;
+}
+
+body.report-page .status-board {
+  background: #F1F6FA;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 190, 214, 0.15);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body.report-page .status-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+body.report-page .status-row + .status-row {
+  border-top: 1px solid rgba(11, 24, 33, 0.08);
+  padding-top: 10px;
+}
+
+body.report-page .status-label {
+  font-weight: 600;
+  color: #5B6E80;
+}
+
+body.report-page .status-value {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+body.report-page .status-link:hover,
+body.report-page .status-link:focus {
+  text-decoration: underline;
+}
+
+body.report-page .intro-card .btn {
+  margin: 0;
 }
 
 body.report-page .slides-wrapper,
