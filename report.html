@@ -46,26 +46,26 @@
 
     <!-- 保養紀錄圖片輪播 -->
     <div id="slidesContainer" class="slides-wrapper"></div>
-    <!-- 提提你區塊：使用設計稿原圖作為封面，點擊後播放影片 -->
-    <section class="videos-section" aria-label="提提你影片">
-      <h2 class="videos-heading">提提你</h2>
-      <div class="video-grid">
+    <!-- 提提你與設計稿：使用原始圖片堆疊呈現 -->
+    <section class="tip-stack" aria-labelledby="tipStackTitle">
+      <h2 id="tipStackTitle" class="sr-only">提提你</h2>
+      <div class="tip-title">
+        <img src="assets/tip_title.svg" alt="提提你">
+      </div>
+      <div class="tip-videos">
         <button class="video-card" type="button" data-video="assets/1252_1757912418.mp4" aria-label="播放影片：全屋漏水不用怕！1秒自動斷水防災裝置">
-          <img src="assets/poster_leak_stop.svg" alt="">
+          <img src="assets/poster_leak_stop.svg" alt="全屋漏水不用怕！1秒自動斷水防災裝置影片封面">
         </button>
         <button class="video-card" type="button" data-video="assets/1253_1757912439.mp4" aria-label="播放影片：家裡突然斷水？3步立刻搞定">
-          <img src="assets/poster_restore_water.svg" alt="">
+          <img src="assets/poster_restore_water.svg" alt="家裡突然斷水？3步立刻搞定影片封面">
         </button>
       </div>
-    </section>
-
-    <!-- 設計版面中固定的服務與推薦圖像 -->
-    <section class="design-illustration">
-      <img src="assets/services_grid.jpg" alt="我們的承諾 Anytime, Anywhere 服務介紹">
-    </section>
-
-    <section class="design-illustration">
-      <img src="assets/referral_reward.jpg" alt="介紹朋友 限量 2,000 元月費獎賞">
+      <div class="tip-artwork">
+        <img src="assets/services_grid.jpg" alt="我們的承諾 Anytime, Anywhere 服務介紹">
+      </div>
+      <div class="tip-artwork">
+        <img src="assets/referral_reward.jpg" alt="介紹朋友 限量 2,000 元月費獎賞">
+      </div>
     </section>
   </main>
   <!-- 圖片放大顯示遮罩 -->
