@@ -9,6 +9,7 @@
   --bg: #F5FAFC;          /* light page background */
   --card: #FFFFFF;        /* card background */
   --text: #0B1821;        /* primary text colour */
+  --muted: #637A91;       /* soft grey body copy */
   --radius: 12px;         /* border radius for cards/buttons */
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* subtle shadow */
 }
@@ -431,7 +432,7 @@ header.header .banner {
 .next-date-text {
   font-size: 0.9rem;
   /* 使用中性色調的深灰色，使文本不會過於突出 */
-  color: #637A91;
+  color: var(--muted);
   margin: 16px 0 28px;
 }
 .survey-msg {
@@ -876,7 +877,7 @@ button:hover {
   font-size: 0.95rem;
   line-height: 1.5;
   /* 採用較為柔和的深灰色，使問候文案更貼近模板設計 */
-  color: #637A91;
+  color: var(--muted);
 }
 
 /* Primary button shared by records, tip and share */
@@ -929,7 +930,7 @@ button:hover {
 /* 下一次保養日期與問卷訊息：套用一致的深灰色 */
 .next-date-text {
   font-size: 0.9rem;
-  color: #637A91;
+  color: var(--muted);
   margin-bottom: 24px;
 }
 
@@ -1080,7 +1081,46 @@ main.container > * + * {
 }
 
 .videos-section .play-overlay {
-  background: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 6px 18px rgba(9, 30, 66, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 4;
+}
+
+.videos-section .play-overlay::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 12px 0 12px 18px;
+  border-color: transparent transparent transparent rgba(55, 65, 81, 0.85);
+  transform: translateX(2px);
+}
+
+.videos-section .play-overlay::after {
+  content: none;
+}
+
+.videos-section .play-overlay:focus-visible {
+  outline: 2px solid rgba(0, 190, 214, 0.6);
+  outline-offset: 2px;
+}
+
+.videos-section .play-overlay:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 22px rgba(9, 30, 66, 0.2);
 }
 
 .services-wrapper,
@@ -1100,7 +1140,7 @@ main.container > * + * {
 /* 報告頁面最終排版調整：加大間距與容器寬度 */
 body.report-page {
   background: #f7fbfd;
-  color: #5B6E80;
+  color: var(--muted);
 }
 
 body.report-page main.container {
@@ -1125,7 +1165,7 @@ body.report-page .intro-card {
   flex-direction: column;
   gap: 24px;
   text-align: left;
-  color: #5B6E80;
+  color: var(--muted);
 }
 
 body.report-page .greeting-text {
@@ -1209,7 +1249,7 @@ body.report-page .status-row + .status-row {
 
 body.report-page .status-label {
   font-weight: 600;
-  color: #5B6E80;
+  color: var(--muted);
 }
 
 body.report-page .status-value {

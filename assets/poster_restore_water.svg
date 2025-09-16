@@ -13,14 +13,9 @@
     <path d="M220 210l64-64M1060 560l74-74" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="6" stroke-linecap="round" />
     <rect width="1280" height="320" fill="#FFFFFF" opacity="0.12" />
   </g>
-  <g fill="#FFFFFF" text-anchor="middle" font-family="'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif">
-    <text x="640" y="312" font-size="72" font-weight="700">家裡突然斷水？</text>
-    <text x="640" y="392" font-size="48" font-weight="600">教你 3 步快速恢復用水</text>
-    <text x="640" y="460" font-size="32" font-weight="500" opacity="0.85">先看影片，遇到狀況就不慌</text>
-  </g>
-  <g transform="translate(640 530)">
-    <circle r="78" fill="rgba(255, 255, 255, 0.22)" />
-    <circle r="66" fill="rgba(255, 255, 255, 0.45)" />
-    <polygon points="-18,-28 32,0 -18,28" fill="#0A4A57" />
+  <g fill="#FFFFFF" font-family="'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif">
+    <text x="140" y="286" font-size="68" font-weight="700">家裡突然斷水？</text>
+    <text x="140" y="366" font-size="48" font-weight="600">教你 3 步快速恢復用水</text>
+    <text x="140" y="440" font-size="32" font-weight="500" opacity="0.85">先看影片，遇到狀況就不慌</text>
   </g>
 </svg>
