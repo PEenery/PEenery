@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>維修回訪報告</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 頂部橫幅：整幅品牌橫幅佔滿頁面寬度 -->
+  <header class="header">
+    <img src="assets/banner_maqua.jpg" alt="MAQUA 服務小回顧" class="banner">
+  </header>
+  <!-- 主內容容器 -->
+  <main class="container">
+    <!-- 問候語及保養紀錄按鈕卡片 -->
+    <section class="intro-card">
+      <div id="greeting" class="greeting-text"></div>
+      <button class="btn records-btn" type="button">保養紀錄</button>
+    </section>
+
+    <!-- 保養紀錄圖片輪播 -->
+    <div id="slidesContainer" class="slides-wrapper"></div>
+    <!-- 下一次保養日期提示 -->
+    <p id="nextDateText" class="next-date-text"></p>
+
+    <!-- 提提你按鈕 -->
+    <button class="btn tip-btn" type="button">提提你</button>
+    <!-- 影片堆疊 -->
+    <div class="videos-section">
+      <!-- 第一個影片：顯示自動斷水裝置介紹 -->
+      <div class="video-item">
+        <video controls playsinline preload="metadata">
+          <source src="assets/1252_1757912418.mp4" type="video/mp4">
+        </video>
+        <!-- 標題覆蓋於影片預覽，簡要描述影片內容，吸引用戶點擊 -->
+        <div class="caption">全屋漏水不用怕！1秒自動斷水防災裝置</div>
+        <button class="play-overlay" aria-label="播放"></button>
+      </div>
+      <!-- 第二個影片：顯示如何快速恢復用水 -->
+      <div class="video-item">
+        <video controls playsinline preload="metadata">
+          <source src="assets/1253_1757912439.mp4" type="video/mp4">
+        </video>
+        <div class="caption">家裡突然斷水？3步立刻搞定</div>
+        <button class="play-overlay" aria-label="播放"></button>
+      </div>
+    </div>
+
+    <!-- 我們的服務區塊 -->
+    <section class="services-wrapper">
+      <!-- 圖片本身已包含 "我們的服務" 標題，因此不重複顯示文字 -->
+      <img src="assets/services_grid.jpg" alt="我們的服務">
+    </section>
+
+    <!-- 介紹朋友月費獎賞區塊 -->
+    <section class="referral-wrapper">
+      <div class="referral-img-box">
+        <!-- 圖片本身已有文案，無需額外覆蓋文字 -->
+        <img src="assets/referral_reward.jpg" alt="介紹朋友月費獎賞">
+      </div>
+      <button class="btn share-btn" type="button">分享好友</button>
+    </section>
+  </main>
+  <!-- 圖片放大顯示遮罩 -->
+  <div id="imageOverlay" onclick="hideOverlay()">
+    <img id="overlayImg" src="" alt="放大圖片">
+  </div>
+
+  <!-- 影片放大播放遮罩 -->
+  <div id="videoOverlay" onclick="hideVideoOverlay(event)">
+    <video id="overlayVideo" controls playsinline></video>
+  </div>
+  <!-- 載入報告圖片的腳本：支援 ids 參數和 urls 參數 -->
+  <script>
+    /**
+     * 取得網址查詢參數
+     * @param {string} name 參數名稱
+     * @returns {string|null}
+     */
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    // 獲取輪播容器
+    const slidesContainer = document.getElementById('slidesContainer');
+    const idsParam = getQueryParam('ids');
+    const urlsParam = getQueryParam('urls');
+
+    // 根據日期動態生成問候文案
+    (function generateGreeting() {
+      const greetingDiv = document.getElementById('greeting');
+      if (!greetingDiv) return;
+      const dateParam = getQueryParam('date');
+      let dateHtml = '';
+      if (dateParam) {
+        try {
+          // 直接解析 yyyy-mm-dd，避免時區偏移
+          const parts = dateParam.split('-');
+          if (parts.length === 3) {
+            const y = parseInt(parts[0], 10);
+            const m = parseInt(parts[1], 10);
+            const d = parseInt(parts[2], 10);
+            if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+              const formatted = `${y}年${m}月${d}日`;
+              dateHtml = `<p>下一次保養預計於 <strong>${formatted}</strong>，屆時我們將再次為您服務。</p>`;
+            }
+          }
+        } catch (e) {
+          console.warn('無法解析日期參數');
+        }
+      }
+      greetingDiv.innerHTML = `
+        <p>您好啊～我是 <strong>MAQUA 淨水管家</strong> 的客服！</p>
+        <p>這次為您提供的是<strong>保養維修記錄</strong>，特別感謝您一直信任我們的服務！</p>
+        <p>若使用中遇到任何問題，隨時聯絡我們，我們會及時為你處理。</p>
+      `;
+    })();
+    
+    /**
+     * 將圖片網址（或 public_id）建立為輪播幻燈片
+     * @param {string[]} list 圖片網址或 public_id 陣列
+     */
+    function appendImages(list) {
+      list.forEach(item => {
+        const slide = document.createElement('div');
+        slide.classList.add('slide');
+        const img = document.createElement('img');
+        // 如果包含 http(s) 開頭視為完整網址；否則視為 Cloudinary public_id
+        if (/^https?:\/\//i.test(item)) {
+          img.src = item;
+        } else {
+          // 如果沒有副檔名，預設使用 .jpg
+          const hasExt = /\.(jpg|jpeg|png|gif|webp)$/i.test(item);
+          const idWithExt = hasExt ? item : `${item}.jpg`;
+          img.src = `https://res.cloudinary.com/djw2gafqe/image/upload/${idWithExt}`;
+        }
+        // 點擊圖片時顯示覆蓋層大圖
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          showOverlay(img.src);
+        });
+        slide.appendChild(img);
+        slidesContainer.appendChild(slide);
+      });
+      // 不需更新位置：使用 scroll-snap
+    }
+
+    // 不再需要 updateSlide：使用 scroll-snap 自動對齊
+
+    // 不再需要左右按鈕，使用滑動和 scroll-snap
+
+    // 顯示放大的圖片
+    function showOverlay(src) {
+      const overlay = document.getElementById('imageOverlay');
+      const overlayImg = document.getElementById('overlayImg');
+      overlayImg.src = src;
+      overlay.style.display = 'flex';
+    }
+
+    // 隱藏放大的圖片
+    function hideOverlay() {
+      const overlay = document.getElementById('imageOverlay');
+      overlay.style.display = 'none';
+    }
+
+    // 顯示影片放大覆蓋層
+    function showVideoOverlay(src) {
+      const overlay = document.getElementById('videoOverlay');
+      const videoEl = document.getElementById('overlayVideo');
+      if (!videoEl) return;
+      videoEl.src = src;
+      overlay.style.display = 'flex';
+      // 嘗試自動播放影片
+      setTimeout(() => {
+        try { videoEl.play(); } catch (e) {}
+      }, 0);
+    }
+    // 隱藏影片放大覆蓋層
+    function hideVideoOverlay(event) {
+      // 如果點擊的是影片本身，則不要關閉覆蓋層
+      if (event && event.target && event.target.id === 'overlayVideo') return;
+      const overlay = document.getElementById('videoOverlay');
+      const videoEl = document.getElementById('overlayVideo');
+      if (videoEl) {
+        try { videoEl.pause(); } catch (e) {}
+        videoEl.removeAttribute('src');
+      }
+      overlay.style.display = 'none';
+    }
+
+    if (urlsParam) {
+      try {
+        const decoded = decodeURIComponent(urlsParam);
+        const list = decoded.split(',').filter(Boolean);
+        if (list.length) {
+          appendImages(list);
+        } else {
+          if (slidesContainer) slidesContainer.innerHTML = '<p>沒有找到照片資料。</p>';
+        }
+      } catch (err) {
+        console.error('解析圖片網址失敗:', err);
+        if (slidesContainer) slidesContainer.innerHTML = '<p>解析圖片網址失敗。</p>';
+      }
+    } else if (idsParam) {
+      try {
+        const decodedIds = decodeURIComponent(idsParam);
+        const list = decodedIds.split(',').filter(Boolean);
+        if (list.length) {
+          appendImages(list);
+        } else {
+          if (slidesContainer) slidesContainer.innerHTML = '<p>沒有找到照片資料。</p>';
+        }
+      } catch (err) {
+        console.error('解析圖片標識失敗:', err);
+        if (slidesContainer) slidesContainer.innerHTML = '<p>解析圖片標識失敗。</p>';
+      }
+    } else {
+      if (slidesContainer) slidesContainer.innerHTML = '<p>沒有找到照片資料。</p>';
+    }
+
+    // 更新下一次保養日期文字，放在圖片處理完成後
+    (function updateNextDate() {
+      const nextEl = document.getElementById('nextDateText');
+      if (!nextEl) return;
+      const dateParam = getQueryParam('date');
+      if (dateParam) {
+        try {
+          const parts = dateParam.split('-');
+          if (parts.length === 3) {
+            const y = parseInt(parts[0], 10);
+            const m = parseInt(parts[1], 10);
+            const d = parseInt(parts[2], 10);
+            if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+              // 日期訊息與問卷訊息合併
+              nextEl.innerHTML = `下一次保養預計於 <strong>${y}年${m}月${d}日</strong>，屆時會再次為您服務～<br>麻煩您撥出少量時間填寫一份簡單小問卷：<a href="http://forms.gle/1mtZCkrerNMY8iZA8" target="_blank">http://forms.gle/1mtZCkrerNMY8iZA8</a>，感謝您的配合！`;
+              return;
+            }
+          }
+        } catch (e) {
+          console.warn('無法解析日期參數');
+        }
+      }
+      // 如果沒有日期，顯示預設問卷提示
+      nextEl.innerHTML = `麻煩您撥出少量時間填寫一份簡單小問卷：<a href="http://forms.gle/1mtZCkrerNMY8iZA8" target="_blank">http://forms.gle/1mtZCkrerNMY8iZA8</a>`;
+    })();
+  </script>
+  <!-- 自定義播放按鈕行為：當點擊覆蓋層時播放影片，影片暫停時恢復覆蓋層 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 對於每個影片容器，綁定播放覆蓋層和容器本身的點擊事件
+      const videoItems = document.querySelectorAll('.video-item');
+      videoItems.forEach(item => {
+        const overlay = item.querySelector('.play-overlay');
+        const sourceEl = item.querySelector('source');
+        if (!sourceEl || !overlay) return;
+        // 點擊覆蓋按鈕時放大播放
+        overlay.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const src = sourceEl.getAttribute('src');
+          if (src) {
+            showVideoOverlay(src);
+          }
+        });
+        // 點擊整個影片容器時亦放大播放
+        item.addEventListener('click', () => {
+          const src = sourceEl.getAttribute('src');
+          if (src) {
+            showVideoOverlay(src);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
