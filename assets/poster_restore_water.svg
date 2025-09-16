@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="restoreGradient" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4C9EFF" />
+      <stop offset="100%" stop-color="#123D8B" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#restoreGradient)" rx="48" />
+  <rect width="1280" height="720" fill="url(#glow)" />
+  <g opacity="0.25" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round">
+    <path d="M160 520 q160 -220 360 -40" fill="none" />
+    <path d="M1160 180 q-200 260 -420 80" fill="none" />
+    <circle cx="260" cy="220" r="60" fill="none" />
+    <circle cx="1010" cy="540" r="80" fill="none" />
+  </g>
+  <g fill="#FFFFFF" text-anchor="middle" font-family="'Noto Sans TC', 'PingFang TC', sans-serif">
+    <text x="640" y="320" font-size="70" font-weight="700">家裡突然斷水？</text>
+    <text x="640" y="395" font-size="48" font-weight="600">3 步立刻恢復用水教學</text>
+    <text x="640" y="468" font-size="32" font-weight="500" opacity="0.85">跟著影片一步步排查</text>
+  </g>
+  <g transform="translate(640 525)">
+    <circle r="78" fill="rgba(255, 255, 255, 0.2)" />
+    <circle r="66" fill="rgba(255, 255, 255, 0.4)" />
+    <polygon points="-18,-28 32,0 -18,28" fill="#FFFFFF" />
+  </g>
+</svg>
