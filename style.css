@@ -1341,44 +1341,36 @@ body.report-page .design-illustration {
 
 body.report-page .videos-section {
   width: 100%;
-  background: var(--brand);
-  border-radius: 28px;
-  padding: 36px 32px 44px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 32px;
-  box-shadow: 0 18px 36px rgba(0, 190, 214, 0.25);
-  color: #FFFFFF;
+  align-items: stretch;
+  gap: 24px;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
 }
 
-body.report-page .videos-preamble {
-  font-size: 1.05rem;
+body.report-page .videos-heading {
+  margin: 0;
+  font-size: 1.2rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 10px 24px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
+  color: var(--brand);
 }
 
 body.report-page .video-grid {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
 }
 
 body.report-page .video-card {
-  position: relative;
   border: none;
   padding: 0;
   background: none;
-  border-radius: 24px;
-  overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 14px 30px rgba(9, 30, 66, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: block;
 }
 
 body.report-page .video-card img {
@@ -1387,51 +1379,18 @@ body.report-page .video-card img {
   height: auto;
 }
 
-body.report-page .video-card .play-badge {
-  position: absolute;
-  top: 22px;
-  right: 22px;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 12px 28px rgba(9, 30, 66, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-body.report-page .video-card .play-badge::before {
-  content: "";
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 14px 0 14px 22px;
-  border-color: transparent transparent transparent rgba(55, 65, 81, 0.85);
-  transform: translateX(2px);
-}
-
 body.report-page .video-card:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.7);
-  outline-offset: -6px;
-}
-
-body.report-page .video-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 36px rgba(9, 30, 66, 0.28);
+  outline: 3px solid rgba(0, 190, 214, 0.4);
+  outline-offset: 4px;
 }
 
 body.report-page .design-illustration {
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 body.report-page .design-illustration img {
   width: 100%;
   display: block;
-  border-radius: 28px;
-  box-shadow: 0 16px 36px rgba(11, 24, 33, 0.12);
 }
 
 body.report-page .next-date-text {
@@ -1463,28 +1422,10 @@ body.report-page .referral-wrapper .share-btn {
   }
 
   body.report-page .videos-section {
-    padding: 28px 20px 36px;
-    border-radius: 24px;
-    gap: 26px;
+    gap: 20px;
   }
 
   body.report-page .video-grid {
-    gap: 22px;
-  }
-
-  body.report-page .video-card {
-    border-radius: 20px;
-  }
-
-  body.report-page .video-card .play-badge {
-    top: 18px;
-    right: 18px;
-    width: 56px;
-    height: 56px;
-    box-shadow: 0 10px 24px rgba(9, 30, 66, 0.22);
-  }
-
-  body.report-page .design-illustration img {
-    border-radius: 24px;
+    gap: 20px;
   }
 }
