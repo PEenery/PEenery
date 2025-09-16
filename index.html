@@ -15,9 +15,15 @@
     <section class="card upload-section">
       <h2 class="section-title">上傳維修紀錄照片</h2>
       <p>請選擇一或多張維修紀錄照片，我們會為您生成專屬回訪報告。</p>
-      <!-- 選擇下次保養日期 -->
-      <label for="nextDate" style="display:block;margin:8px 0 4px;font-weight:600;">下次保養日期：</label>
-      <input type="date" id="nextDate" class="date-input">
+      <!-- 選擇本次與下次保養日期 -->
+      <div class="date-stack">
+        <label for="serviceDate" class="field-label">本次保養日期：</label>
+        <input type="date" id="serviceDate" class="date-input">
+      </div>
+      <div class="date-stack">
+        <label for="nextDate" class="field-label">下次保養日期：</label>
+        <input type="date" id="nextDate" class="date-input">
+      </div>
       <!-- 隱藏原生檔案輸入框，改用自訂樣式的按鈕觸發檔案選取 -->
       <input type="file" id="fileInput" class="file-input" accept="image/*" multiple hidden>
       <label for="fileInput" class="upload-btn">選擇照片</label>
@@ -122,14 +128,19 @@
           const result = await response.json();
           ids.push(result.public_id);
         }
-        // 取得下次保養日期
-        const dateInput = document.getElementById('nextDate');
-        const dateValue = dateInput && dateInput.value ? dateInput.value : '';
+        // 取得本次與下次保養日期
+        const serviceDateInput = document.getElementById('serviceDate');
+        const nextDateInput = document.getElementById('nextDate');
+        const serviceDateValue = serviceDateInput && serviceDateInput.value ? serviceDateInput.value : '';
+        const nextDateValue = nextDateInput && nextDateInput.value ? nextDateInput.value : '';
         // 組成查詢字串
         const paramIds = encodeURIComponent(ids.join(','));
         let url = 'report.html?ids=' + paramIds;
-        if (dateValue) {
-          url += '&date=' + encodeURIComponent(dateValue);
+        if (serviceDateValue) {
+          url += '&serviceDate=' + encodeURIComponent(serviceDateValue);
+        }
+        if (nextDateValue) {
+          url += '&date=' + encodeURIComponent(nextDateValue);
         }
         // 導向至報告頁面
         window.location.href = url;

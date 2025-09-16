@@ -23,10 +23,15 @@
             <p>感謝一直以來讓我們陪伴在您身邊！</p>
           </div>
         </div>
+        <p class="greeting-note">本次保養時間：<span id="serviceDateInline">今日完成</span></p>
         <p class="greeting-note">下一次保養預計於 <span id="nextDateInline">待安排</span>，屆時我們將再次為您服務。</p>
         <p class="greeting-subline">我們會不斷優化服務，懇請你向我們大膽評價！</p>
       </div>
       <div class="status-board" aria-live="polite">
+        <div class="status-row">
+          <span class="status-label">本次保養時間</span>
+          <span class="status-value" id="serviceDateValue">今日完成</span>
+        </div>
         <div class="status-row">
           <span class="status-label">下次保養時間</span>
           <span class="status-value" id="nextDateValue">待安排</span>
@@ -207,39 +212,53 @@
       if (slidesContainer) slidesContainer.innerHTML = '<p>沒有找到照片資料。</p>';
     }
 
-    // 更新下一次保養日期文字，放在圖片處理完成後
-    (function updateNextDate() {
-      const dateEl = document.getElementById('nextDateValue');
-      const inlineDateEl = document.getElementById('nextDateInline');
+    // 更新本次與下次保養日期文字，放在圖片處理完成後
+    (function updateDates() {
+      const nextDateEl = document.getElementById('nextDateValue');
+      const inlineNextDateEl = document.getElementById('nextDateInline');
+      const serviceDateEl = document.getElementById('serviceDateValue');
+      const inlineServiceDateEl = document.getElementById('serviceDateInline');
       const surveyEl = document.getElementById('surveyLink');
       if (surveyEl && !surveyEl.textContent.trim()) {
         surveyEl.textContent = surveyEl.href;
       }
-      if (!dateEl) return;
-      const dateParam = getQueryParam('date');
-      if (dateParam) {
+
+      const formatDate = (value) => {
+        if (!value) return null;
         try {
-          const parts = dateParam.split('-');
+          const parts = value.split('-');
           if (parts.length === 3) {
             const y = parseInt(parts[0], 10);
             const m = parseInt(parts[1], 10);
             const d = parseInt(parts[2], 10);
             if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
-              const formatted = `${y}年${m}月${d}日`;
-              dateEl.textContent = formatted;
-              if (inlineDateEl) {
-                inlineDateEl.textContent = formatted;
-              }
-              return;
+              return `${y}年${m}月${d}日`;
             }
           }
         } catch (e) {
           console.warn('無法解析日期參數');
         }
+        return null;
+      };
+
+      const nextFormatted = formatDate(getQueryParam('date'));
+      if (nextDateEl) {
+        const fallback = '待安排';
+        const value = nextFormatted || fallback;
+        nextDateEl.textContent = value;
+        if (inlineNextDateEl) {
+          inlineNextDateEl.textContent = value;
+        }
       }
-      dateEl.textContent = '待安排';
-      if (inlineDateEl) {
-        inlineDateEl.textContent = '待安排';
+
+      const serviceFormatted = formatDate(getQueryParam('serviceDate'));
+      if (serviceDateEl) {
+        const fallback = serviceDateEl.textContent || '今日完成';
+        const value = serviceFormatted || fallback;
+        serviceDateEl.textContent = value;
+        if (inlineServiceDateEl) {
+          inlineServiceDateEl.textContent = value;
+        }
       }
     })();
   </script>
