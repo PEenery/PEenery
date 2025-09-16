@@ -141,7 +141,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: none;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s ease;
@@ -149,10 +149,24 @@ body {
 }
 .play-overlay::before {
   content: "";
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(240, 242, 245, 0.92);
+  box-shadow: 0 6px 18px rgba(9, 30, 66, 0.18);
+  display: block;
+}
+.play-overlay::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -50%);
   border-style: solid;
-  /* 調整全局播放按鈕尺寸為一半 */
-  border-width: 18px 0 18px 30px;
-  border-color: transparent transparent transparent #ffffff;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent rgba(55, 65, 81, 0.8);
 }
 .video-wrap {
   position: relative;
@@ -276,7 +290,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: none;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s ease;
@@ -286,15 +300,24 @@ body {
 }
 .play-overlay::before {
   content: "";
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(240, 242, 245, 0.92);
+  box-shadow: 0 6px 18px rgba(9, 30, 66, 0.18);
   display: block;
+}
+.play-overlay::after {
+  content: "";
+  position: absolute;
   width: 0;
   height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -50%);
   border-style: solid;
-  /* 調整邊框寬度以增大三角形尺寸 */
-  /* 放大播放按鈕三角形尺寸，使其在手機上更明顯 */
-  /* 再次放大三角形尺寸，使播放按鈕更顯眼 */
-  border-width: 36px 0 36px 60px;
-  border-color: transparent transparent transparent #ffffff;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent rgba(55, 65, 81, 0.8);
 }
 /* 播放中隱藏覆蓋按鈕 */
 .video-wrap.video-playing .play-overlay {
@@ -347,9 +370,9 @@ header.header .banner {
 
 /* 主內容容器：限制最大寬度為 480px，適合手機瀏覽 */
 .container {
-  max-width: 480px;
+  max-width: 520px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 24px 24px 40px;
 }
 
 /* 問候卡片：圓角白底陰影，與橫幅微距離 */
@@ -357,8 +380,9 @@ header.header .banner {
   background: #FFFFFF;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  padding: 20px;
+  padding: 24px;
   margin-top: -40px;
+  margin-bottom: 28px;
   position: relative;
   z-index: 1;
 }
@@ -375,18 +399,18 @@ header.header .banner {
   font-size: 1rem;
   font-weight: 600;
   text-align: center;
-  margin: 20px 0;
+  margin: 24px 0;
   cursor: default;
 }
 
 /* 水平滾動圖片容器：支持手指拖曳，scroll-snap 對齊 */
 .slides-wrapper {
   display: flex;
-  gap: 16px;
+  gap: 18px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  margin: 16px 0;
+  margin: 24px 0 28px;
 }
 .slides-wrapper .slide {
   flex: 0 0 80%;
@@ -408,7 +432,7 @@ header.header .banner {
   font-size: 0.9rem;
   /* 使用中性色調的深灰色，使文本不會過於突出 */
   color: #637A91;
-  margin: 8px 0;
+  margin: 16px 0 28px;
 }
 .survey-msg {
   font-size: 0.85rem;
@@ -421,14 +445,15 @@ header.header .banner {
 .videos-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
+  margin: 32px 0;
 }
 .videos-section .video-item {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
   background: #F5F5F5;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 .videos-section .video-item video {
   width: 100%;
@@ -445,17 +470,31 @@ header.header .banner {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: none;
   border: none;
   cursor: pointer;
   z-index: 2;
 }
 .videos-section .play-overlay::before {
   content: "";
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(240, 242, 245, 0.92);
+  box-shadow: 0 6px 18px rgba(9, 30, 66, 0.18);
+  display: block;
+}
+.videos-section .play-overlay::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -50%);
   border-style: solid;
-  /* 將播放按鈕尺寸縮小為原來的一半（18px x 30px） */
-  border-width: 18px 0 18px 30px;
-  border-color: transparent transparent transparent #FFFFFF;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent rgba(55, 65, 81, 0.8);
 }
 
 /* 影片標題覆蓋：顯示在影片預覽底部的文字，用於簡要描述影片內容 */
@@ -464,20 +503,19 @@ header.header .banner {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 8px 12px;
-  font-size: 0.9rem;
+  padding: 12px 16px;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #FFFFFF;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%);
   z-index: 3;
-  /* 避免標題覆蓋播放按鈕 */
   pointer-events: none;
 }
 
 /* 服務區塊 */
 .services-wrapper {
-  margin-top: 32px;
+  margin-top: 40px;
   text-align: center;
 }
 .services-title {
@@ -499,7 +537,7 @@ header.header .banner {
 
 /* 推薦朋友區塊 */
 .referral-wrapper {
-  margin-top: 32px;
+  margin-top: 40px;
   text-align: center;
 }
 .referral-img-box {
@@ -924,16 +962,30 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.35);
+  background: none;
   border: none;
   cursor: pointer;
 }
 .video-box .play-overlay::before {
   content: "";
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(240, 242, 245, 0.92);
+  box-shadow: 0 6px 18px rgba(9, 30, 66, 0.18);
+  display: block;
+}
+.video-box .play-overlay::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -50%);
   border-style: solid;
-  /* 調整舊版影片元件的播放按鈕尺寸為一半 */
-  border-width: 18px 0 18px 30px;
-  border-color: transparent transparent transparent #ffffff;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent rgba(55, 65, 81, 0.8);
 }
 
 /* Services wrapper and pill title */
@@ -968,4 +1020,79 @@ button:hover {
 }
 .referral-wrapper .share-btn {
   margin-top: 16px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Final layout refinements for centred typography and spacing       */
+/* ------------------------------------------------------------------ */
+main.container {
+  text-align: center;
+  padding: 28px 24px 48px;
+}
+
+main.container > * + * {
+  margin-top: 24px;
+}
+
+.intro-card {
+  padding: 28px 24px;
+  text-align: center;
+  margin-top: -32px;
+  box-shadow: 0 6px 16px rgba(11, 24, 33, 0.08);
+}
+
+.intro-card .greeting-text p {
+  margin-bottom: 12px;
+}
+
+.intro-card .btn {
+  margin-top: 20px;
+}
+
+#slidesContainer {
+  margin: 0 auto;
+}
+
+#slidesContainer p {
+  margin: 0;
+}
+
+.slides-wrapper {
+  margin: 24px 0 28px;
+  padding: 0;
+}
+
+.next-date-text {
+  margin: 16px 0 28px;
+}
+
+.btn {
+  margin: 24px 0;
+}
+
+.videos-section {
+  margin: 32px 0;
+  gap: 24px;
+}
+
+.videos-section .video-item {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.videos-section .play-overlay {
+  background: none;
+}
+
+.services-wrapper,
+.referral-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.referral-wrapper {
+  padding: 0;
+}
+
+.referral-wrapper .share-btn {
+  margin-top: 24px;
 }
