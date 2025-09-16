@@ -15,7 +15,17 @@
   <main class="container">
     <!-- 問候語及保養紀錄按鈕卡片 -->
     <section class="intro-card">
-      <div id="greeting" class="greeting-text"></div>
+      <div id="greeting" class="greeting-text">
+        <div class="greeting-block">
+          <span class="greeting-emoji" aria-hidden="true">👏</span>
+          <div class="greeting-lines">
+            <p>今天已經幫您完成這次的保養維護，設備狀態一切良好，請安心使用～</p>
+            <p>感謝一直以來讓我們陪伴在您身邊！</p>
+          </div>
+        </div>
+        <p class="greeting-note">下一次保養預計於 <span id="nextDateInline">待安排</span>，屆時我們將再次為您服務。</p>
+        <p class="greeting-subline">我們會不斷優化服務，懇請你向我們大膽評價！</p>
+      </div>
       <div class="status-board" aria-live="polite">
         <div class="status-row">
           <span class="status-label">下次保養時間</span>
@@ -95,41 +105,6 @@
     const idsParam = getQueryParam('ids');
     const urlsParam = getQueryParam('urls');
 
-    // 根據日期動態生成問候文案
-    (function generateGreeting() {
-      const greetingDiv = document.getElementById('greeting');
-      if (!greetingDiv) return;
-      const dateParam = getQueryParam('date');
-      let dateHtml = '';
-      if (dateParam) {
-        try {
-          // 直接解析 yyyy-mm-dd，避免時區偏移
-          const parts = dateParam.split('-');
-          if (parts.length === 3) {
-            const y = parseInt(parts[0], 10);
-            const m = parseInt(parts[1], 10);
-            const d = parseInt(parts[2], 10);
-            if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
-              const formatted = `${y}年${m}月${d}日`;
-              dateHtml = `<p>下一次保養預計於 <strong>${formatted}</strong>，屆時我們將再次為您服務。</p>`;
-            }
-          }
-        } catch (e) {
-          console.warn('無法解析日期參數');
-        }
-      }
-      greetingDiv.innerHTML = `
-        <div class="greeting-block">
-          <span class="greeting-emoji" aria-hidden="true">👏</span>
-          <div class="greeting-lines">
-            <p>今天已經幫您完成這次的保養維護，設備狀態一切良好，請安心使用～</p>
-            <p>感謝一直以來讓我們陪伴在您身邊！</p>
-          </div>
-        </div>
-        <p class="greeting-subline">我們會不斷優化服務，懇請你向我們大膽評價！</p>
-      `;
-    })();
-    
     /**
      * 將圖片網址（或 public_id）建立為輪播幻燈片
      * @param {string[]} list 圖片網址或 public_id 陣列
@@ -235,6 +210,7 @@
     // 更新下一次保養日期文字，放在圖片處理完成後
     (function updateNextDate() {
       const dateEl = document.getElementById('nextDateValue');
+      const inlineDateEl = document.getElementById('nextDateInline');
       const surveyEl = document.getElementById('surveyLink');
       if (surveyEl && !surveyEl.textContent.trim()) {
         surveyEl.textContent = surveyEl.href;
@@ -249,7 +225,11 @@
             const m = parseInt(parts[1], 10);
             const d = parseInt(parts[2], 10);
             if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
-              dateEl.textContent = `${y}年${m}月${d}日`;
+              const formatted = `${y}年${m}月${d}日`;
+              dateEl.textContent = formatted;
+              if (inlineDateEl) {
+                inlineDateEl.textContent = formatted;
+              }
               return;
             }
           }
@@ -258,6 +238,9 @@
         }
       }
       dateEl.textContent = '待安排';
+      if (inlineDateEl) {
+        inlineDateEl.textContent = '待安排';
+      }
     })();
   </script>
   <!-- 自定義播放按鈕行為：當點擊覆蓋層時播放影片，影片暫停時恢復覆蓋層 -->

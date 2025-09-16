@@ -1098,6 +1098,11 @@ main.container > * + * {
 }
 
 /* 報告頁面最終排版調整：加大間距與容器寬度 */
+body.report-page {
+  background: #f7fbfd;
+  color: #5B6E80;
+}
+
 body.report-page main.container {
   max-width: 640px;
   padding: 36px 36px 64px;
@@ -1152,6 +1157,18 @@ body.report-page .greeting-lines p {
   font-size: 0.95rem;
   line-height: 1.6;
   color: inherit;
+}
+
+body.report-page .greeting-note {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: inherit;
+}
+
+body.report-page .greeting-note span {
+  color: var(--brand);
+  font-weight: 600;
 }
 
 body.report-page .greeting-lines p:first-child {
