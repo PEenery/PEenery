@@ -1096,3 +1096,65 @@ main.container > * + * {
 .referral-wrapper .share-btn {
   margin-top: 24px;
 }
+
+/* 報告頁面最終排版調整：加大間距與容器寬度 */
+body.report-page main.container {
+  max-width: 640px;
+  padding: 36px 36px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  text-align: center;
+}
+
+body.report-page main.container > * + * {
+  margin-top: 0;
+}
+
+body.report-page .intro-card {
+  margin-top: -44px;
+  margin-bottom: 0;
+  padding: 32px 28px;
+  box-shadow: 0 8px 24px rgba(11, 24, 33, 0.08);
+}
+
+body.report-page .slides-wrapper,
+body.report-page .next-date-text,
+body.report-page .videos-section,
+body.report-page .services-wrapper,
+body.report-page .referral-wrapper {
+  margin: 0;
+}
+
+body.report-page .videos-section {
+  gap: 28px;
+}
+
+body.report-page .next-date-text {
+  text-align: center;
+}
+
+body.report-page .btn.tip-btn {
+  margin: 0;
+}
+
+body.report-page .services-wrapper,
+body.report-page .referral-wrapper {
+  width: 100%;
+}
+
+body.report-page .referral-wrapper .share-btn {
+  margin: 16px auto 0;
+}
+
+@media (max-width: 600px) {
+  body.report-page main.container {
+    padding: 24px 20px 44px;
+    gap: 28px;
+  }
+
+  body.report-page .intro-card {
+    margin-top: -36px;
+    padding: 28px 22px;
+  }
+}
