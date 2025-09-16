@@ -25,6 +25,17 @@ body {
   color: var(--text);
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 /* Header containing the brand banner */
 /* Header containing the brand banner */
 .header {
@@ -1189,12 +1200,12 @@ body.report-page {
 }
 
 body.report-page main.container {
-  max-width: 640px;
-  padding: 36px 36px 64px;
+  max-width: 680px;
+  padding: 40px 40px 72px;
   display: flex;
   flex-direction: column;
-  gap: 36px;
-  text-align: left;
+  gap: 40px;
+  text-align: center;
 }
 
 body.report-page main.container > * + * {
@@ -1204,12 +1215,13 @@ body.report-page main.container > * + * {
 body.report-page .intro-card {
   margin-top: -44px;
   margin-bottom: 0;
-  padding: 32px 28px;
+  padding: 36px 32px;
   box-shadow: 0 8px 24px rgba(11, 24, 33, 0.08);
   display: flex;
   flex-direction: column;
   gap: 24px;
-  text-align: left;
+  text-align: center;
+  align-items: center;
   color: var(--muted);
 }
 
@@ -1217,11 +1229,14 @@ body.report-page .greeting-text {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  align-items: center;
+  text-align: center;
 }
 
 body.report-page .greeting-block {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
 }
 
@@ -1235,6 +1250,7 @@ body.report-page .greeting-lines {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  text-align: center;
 }
 
 body.report-page .greeting-lines p {
@@ -1276,6 +1292,10 @@ body.report-page .status-board {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-self: stretch;
+  max-width: 440px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 body.report-page .status-row {
@@ -1315,14 +1335,103 @@ body.report-page .intro-card .btn {
 
 body.report-page .slides-wrapper,
 body.report-page .next-date-text,
-body.report-page .videos-section,
-body.report-page .services-wrapper,
-body.report-page .referral-wrapper {
+body.report-page .design-illustration {
   margin: 0;
 }
 
 body.report-page .videos-section {
+  width: 100%;
+  background: var(--brand);
+  border-radius: 28px;
+  padding: 36px 32px 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 18px 36px rgba(0, 190, 214, 0.25);
+  color: #FFFFFF;
+}
+
+body.report-page .videos-preamble {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+body.report-page .video-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 28px;
+}
+
+body.report-page .video-card {
+  position: relative;
+  border: none;
+  padding: 0;
+  background: none;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(9, 30, 66, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.report-page .video-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+body.report-page .video-card .play-badge {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 28px rgba(9, 30, 66, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.report-page .video-card .play-badge::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 14px 0 14px 22px;
+  border-color: transparent transparent transparent rgba(55, 65, 81, 0.85);
+  transform: translateX(2px);
+}
+
+body.report-page .video-card:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
+  outline-offset: -6px;
+}
+
+body.report-page .video-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(9, 30, 66, 0.28);
+}
+
+body.report-page .design-illustration {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+body.report-page .design-illustration img {
+  width: 100%;
+  display: block;
+  border-radius: 28px;
+  box-shadow: 0 16px 36px rgba(11, 24, 33, 0.12);
 }
 
 body.report-page .next-date-text {
@@ -1344,12 +1453,38 @@ body.report-page .referral-wrapper .share-btn {
 
 @media (max-width: 600px) {
   body.report-page main.container {
-    padding: 24px 20px 44px;
-    gap: 28px;
+    padding: 28px 20px 52px;
+    gap: 32px;
   }
 
   body.report-page .intro-card {
-    margin-top: -36px;
-    padding: 28px 22px;
+    margin-top: -32px;
+    padding: 30px 22px;
+  }
+
+  body.report-page .videos-section {
+    padding: 28px 20px 36px;
+    border-radius: 24px;
+    gap: 26px;
+  }
+
+  body.report-page .video-grid {
+    gap: 22px;
+  }
+
+  body.report-page .video-card {
+    border-radius: 20px;
+  }
+
+  body.report-page .video-card .play-badge {
+    top: 18px;
+    right: 18px;
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 10px 24px rgba(9, 30, 66, 0.22);
+  }
+
+  body.report-page .design-illustration img {
+    border-radius: 24px;
   }
 }
